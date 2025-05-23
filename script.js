@@ -59,7 +59,7 @@ addBtn.addEventListener('click', function () {
         return;
     }
     else if(date == ''){
-        alert('please add a do-date');
+        alert('please add a do-date below');
         return;
     }
 
