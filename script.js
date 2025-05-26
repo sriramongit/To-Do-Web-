@@ -9,31 +9,27 @@ renderTodoList();
 let flag = false;
 
 
-
-// let todoList = [];
-// localStorage.removeItem('todoList')
-
-
 function renderTodoList() { 
     let todoListHTML = '';
 
-    for(let i = 0 ; i < todoList.length ; i++) { 
-        let todo = todoList[i];
-
+    
+    todoList.forEach(function (todo, index) {
         let html = `<div class="group">
         <div class="left-sec">
-        <input class="checkbox" type="checkbox" id="task${i + 1}" 
+        <input class="checkbox" type="checkbox" id="task${index + 1}" 
         ${todo.flag ? "checked" : ""} 
-        onclick="validateCheckbox(${i + 1});">
+        onclick="validateCheckbox(${index + 1});">
         </div>
         <div class="mid-sec">
-        <label class="task${i + 1}" for="task${i + 1}" style="text-decoration: ${
-                todo.flag ? "line-through" : "none"
-                };">${todo.name}</label>
+        <label class="task${index + 1}" for="task${
+          index + 1
+        }" style="text-decoration: ${todo.flag ? "line-through" : "none"};">${
+          todo.name
+        }</label>
         <p>${todo.date}</p>
         </div>
         <div class="right-sec">
-        <button class="btn-delete" onclick="todoList.splice(${i}, 1);
+        <button class="btn-delete" onclick="todoList.splice(${index}, 1);
         localStorage.setItem('todoList', JSON.stringify(todoList));
         renderTodoList();">
         <img class="cross" src="assets/9312232.png" alt="X">
@@ -41,7 +37,7 @@ function renderTodoList() {
         </div> 
         </div>`;
         todoListHTML += html;
-    }
+    });
 
     document.querySelector('.list').innerHTML = todoListHTML;
 }
