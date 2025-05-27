@@ -8,7 +8,6 @@ renderTodoList();
 
 let flag = false;
 
-
 function renderTodoList() { 
     let todoListHTML = '';
 
@@ -42,35 +41,42 @@ function renderTodoList() {
     document.querySelector('.list').innerHTML = todoListHTML;
 }
 
-addBtn.addEventListener('click', function () { 
-    const name = textElement.value;
-    const date = datePicker.value;
-    //if fields are empty
-    if(name == '' && date == ''){
-        alert('Please add a task and do-date');
-        return;
-    }
-    else if(name == ''){
-        alert('Please add a task first');
-        return;
-    }
-    else if(date == ''){
-        alert('please add a do-date below');
-        return;
-    }
 
-     const obj = {
-        name, 
-        date,
-        flag
-    };
+addBtn.addEventListener('click', addTask);
 
-    todoList.push(obj);
-    textElement.value = '';
-    //storing task in local storage.
-    localStorage.setItem('todoList', JSON.stringify(todoList));
-    //calling function to render the To-Do List.
-    renderTodoList(); 
+function addTask() {
+  const name = textElement.value;
+  const date = datePicker.value;
+  //if fields are empty
+  if (name == "" && date == "") {
+    alert("Please add a task and do-date");
+    return;
+  } else if (name == "") {
+    alert("Please add a task first");
+    return;
+  } else if (date == "") {
+    alert("please add a do-date below");
+    return;
+  }
+
+  const obj = {
+    name,
+    date,
+    flag,
+  };
+
+  todoList.push(obj);
+  textElement.value = "";
+  //storing task in local storage.
+  localStorage.setItem("todoList", JSON.stringify(todoList));
+  //calling function to render the To-Do List.
+  renderTodoList();
+};
+
+document.body.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    addTask();
+  }
 });
 
 
