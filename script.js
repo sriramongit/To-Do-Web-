@@ -1,5 +1,6 @@
 const textElement = document.querySelector('.textbox');
 const addBtn = document.querySelector('.btn-add');
+const deleteBtn = document.querySelector('.btn-delete');
 const datePicker = document.querySelector('.date-picker');
 const checkbox = document.querySelector('.checkbox');
 
@@ -28,9 +29,7 @@ function renderTodoList() {
         <p>${todo.date}</p>
         </div>
         <div class="right-sec">
-        <button class="btn-delete" onclick="todoList.splice(${index}, 1);
-        localStorage.setItem('todoList', JSON.stringify(todoList));
-        renderTodoList();">
+        <button class="btn-delete" onclick="deleteTask(${index})">
         <img class="cross" src="assets/9312232.png" alt="X">
         </button>
         </div> 
@@ -43,6 +42,7 @@ function renderTodoList() {
 
 
 addBtn.addEventListener('click', addTask);
+// deleteBtn.addEventListener('click', deleteTask);
 
 function addTask() {
   const name = textElement.value;
@@ -73,9 +73,21 @@ function addTask() {
   renderTodoList();
 };
 
+function deleteTask(index) { 
+  todoList.splice(index, 1);
+  localStorage.setItem("todoList", JSON.stringify(todoList));
+  renderTodoList();
+}
+
 document.body.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     addTask();
+  }
+});
+
+document.body.addEventListener("keydown", (event) => {
+  if (event.key === "Delete") {
+    deleteTask();
   }
 });
 
